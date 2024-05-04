@@ -16,7 +16,7 @@ def train(args):
         env,
         cuda=args.cuda,
         load_model=args.load_model,
-        xpid=args.xpid,
+        xpid=args.env,
         savedir=args.savedir,
         save_interval=args.save_interval,
         num_actor_devices=args.num_actor_devices,
@@ -34,14 +34,9 @@ if __name__ == '__main__':
         type=str,
         default='leduc-holdem',
         choices=[
-            'blackjack',
             'leduc-holdem',
             'limit-holdem',
-            'doudizhu',
-            'mahjong',
             'no-limit-holdem',
-            'uno',
-            'gin-rummy'
         ],
     )
     parser.add_argument(
@@ -53,11 +48,6 @@ if __name__ == '__main__':
         '--load_model',
         action='store_true',
         help='Load an existing model',
-    )
-    parser.add_argument(
-        '--xpid',
-        default='leduc_holdem',
-        help='Experiment id (default: leduc_holdem)',
     )
     parser.add_argument(
         '--savedir',

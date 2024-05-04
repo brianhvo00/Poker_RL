@@ -16,14 +16,14 @@ from rlcard.utils import (
 def train(args):
     # Make environments, CFR only supports Leduc Holdem
     env = rlcard.make(
-        'leduc-holdem',
+        args.env,
         config={
             'seed': 0,
             'allow_step_back': True,
         }
     )
     eval_env = rlcard.make(
-        'leduc-holdem',
+        args.env,
         config={
             'seed': 0,
         }
@@ -49,7 +49,8 @@ def train(args):
     ])
 
     # Start training
-    with Logger(args.log_dir) as logger:
+    dir = f'{args.log_dir}/{args.env}_CFR_result'
+    with Logger(dir) as logger:
         for episode in range(args.num_episodes):
             agent.train()
             print('\rIteration {}'.format(episode), end='')
@@ -70,7 +71,19 @@ def train(args):
     plot_curve(csv_path, fig_path, 'cfr')
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser("CFR example in RLCard")
+    parser = argparse.ArgumentParser("CFR RLCard")
+    print("running cfr")
+    
+    parser.add_argument(
+        '--env',
+        type=str,
+        default='leduc-holdem',
+        choices=[
+            'leduc-holdem',
+            'limit-holdem',
+            'no-limit-holdem',
+        ],
+    )
     parser.add_argument(
         '--seed',
         type=int,
@@ -99,4 +112,5 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    print(args)
     train(args)
