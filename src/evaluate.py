@@ -60,6 +60,7 @@ if __name__ == '__main__':
         'DMC': 'src/experiments/dmc_result/leduc-holdem/0_32000.pth',
         'DQN': 'src/experiments/leduc-holdem_DQN_result/model.pth',
         'NFSP': 'src/experiments/leduc-holdem_NFSP_result/model.pth',
+        'CFR': 'src/experiments/leduc_holdem_cfr_result/cfr_model/policy.pkl'
     }
     
     limit_holdem = {
@@ -78,7 +79,7 @@ if __name__ == '__main__':
     envs = ['leduc-holdem', 'limit-holdem', 'no-limit-holdem']
     for i, game in enumerate(games):
         models = game.values()
-        pairs = {comb for comb in combinations(models, r=2)}
+        pairs = [comb for comb in combinations(models, r=2)]
         for pair in pairs:
             print(envs[i])
             # print(pair)   
