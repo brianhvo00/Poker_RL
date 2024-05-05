@@ -1,7 +1,7 @@
 ''' An example of evluating the trained models in RLCard
 '''
 import os
-import argparse
+from itertools import combinations
 
 import rlcard
 from rlcard.agents import (
@@ -33,72 +33,55 @@ def load_model(model_path, env=None, position=None, device=None):
     
     return agent
 
-def evaluate(args):
-
+def evaluate(env, models, seed=0, num_games=2000):
     # Check whether gpu is available
     device = get_device()
         
     # Seed numpy, torch, random
-    set_seed(args.seed)
+    set_seed(seed)
 
     # Make the environment with seed
-    env = rlcard.make(args.env, config={'seed': args.seed})
+    env = rlcard.make(env, config={'seed': seed})
 
     # Load models
     agents = []
-    for position, model_path in enumerate(args.models):
+    for position, model_path in enumerate(models):
         agents.append(load_model(model_path, env, position, device))
     env.set_agents(agents)
 
     # Evaluate
-    rewards = tournament(env, args.num_games)
+    rewards = tournament(env, num_games)
     for position, reward in enumerate(rewards):
-        print(position, args.models[position], reward)
+        print(position, models[position], reward)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser("Evaluation example in RLCard")
-    parser.add_argument(
-        '--env',
-        type=str,
-        default='leduc-holdem',
-        choices=[
-            'blackjack',
-            'leduc-holdem',
-            'limit-holdem',
-            'doudizhu',
-            'mahjong',
-            'no-limit-holdem',
-            'uno',
-            'gin-rummy',
-        ],
-    )
-    parser.add_argument(
-        '--models',
-        nargs='*',
-        default=[
-            '/Users/brianvo/Documents/GitHub/Poker_RL_yikes/src/experiments/dmc_result/limit-holdem/0_32000.pth',
-            '/Users/brianvo/Documents/GitHub/Poker_RL_yikes/src/experiments/limit-holdem_DQN_result/model.pth',
-            '/Users/brianvo/Documents/GitHub/Poker_RL_yikes/src/experiments/limit-holdem_NFSP_result/model.pth',
-            'random',
-        ],
-    )
-    parser.add_argument(
-        '--cuda',
-        type=str,
-        default='',
-    )
-    parser.add_argument(
-        '--seed',
-        type=int,
-        default=42,
-    )
-    parser.add_argument(
-        '--num_games',
-        type=int,
-        default=2000,
-    )
+    
+    leduc_holdem = {
+        'DMC': 'src/experiments/dmc_result/leduc-holdem/0_32000.pth',
+        'DQN': 'src/experiments/leduc-holdem_DQN_result/model.pth',
+        'NFSP': 'src/experiments/leduc-holdem_NFSP_result/model.pth',
+    }
+    
+    limit_holdem = {
+        'DMC': 'src/experiments/dmc_result/limit-holdem/0_28800.pth',
+        'DQN': 'src/experiments/limit-holdem_DQN_result/model.pth',
+        'NFSP': 'src/experiments/limit-holdem_NFSP_result/model.pth',
+    }
+    
+    no_limit_holdem = {
+        'DMC': 'src/experiments/dmc_result/no-limit-holdem/0_28800.pth',
+        'DQN': 'src/experiments/no-limit-holdem_DQN_result/model.pth',
+        'NFSP': 'src/experiments/no-limit-holdem_NFSP_result/model.pth',
+    }
+    
+    games = [leduc_holdem, limit_holdem, no_limit_holdem]
+    envs = ['leduc-holdem', 'limit-holdem', 'no-limit-holdem']
+    for i, game in enumerate(games):
+        models = game.values()
+        pairs = {comb for comb in combinations(models, r=2)}
+        for pair in pairs:
+            print(envs[i])
+            # print(pair)   
+            evaluate(envs[i],pair)
 
-    args = parser.parse_args()
-
-    os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda
-    evaluate(args)
+    

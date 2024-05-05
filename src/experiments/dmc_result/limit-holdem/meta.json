@@ -1,7 +1,7 @@
 {
     "args": {},
     "date_end": null,
-    "date_start": "2024-05-02 03:37:06.266953",
+    "date_start": "2024-05-04 17:56:05.216466",
     "env": {
         "COLORTERM": "truecolor",
         "COMMAND_MODE": "unix2003",
@@ -21,7 +21,6 @@
         "PATH": "/Users/brianvo/.vscode/extensions/ms-python.python-2024.4.1/python_files/deactivate/zsh:/Users/brianvo/Documents/GitHub/Poker_RL_yikes/poker/bin:/Users/brianvo/.vscode/extensions/ms-python.python-2024.4.1/python_files/deactivate/zsh:/Users/brianvo/Documents/GitHub/Poker_RL_yikes/poker/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/brianvo/.vscode/extensions/ms-python.python-2024.4.1/python_files/deactivate/zsh:/Users/brianvo/Documents/GitHub/Poker_RL_yikes/poker/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin",
         "PS1": "(poker) %n@%m %1~ %# ",
         "PWD": "/Users/brianvo/Documents/GitHub/Poker_RL_yikes/src",
-        "PYTHONSTARTUP": "/Users/brianvo/.vscode/extensions/ms-python.python-2024.4.1/python_files/pythonrc.py",
         "SHELL": "/bin/zsh",
         "SHLVL": "1",
         "SSH_AUTH_SOCK": "/private/tmp/com.apple.launchd.TFTQmESs5r/Listeners",
@@ -47,7 +46,7 @@
     },
     "git": {
         "branch": "main",
-        "commit": "6e7b785b1ffc3e6291c8b20ceec02f5416a5bf42",
+        "commit": "3010e93c315b43ff3ef9d0f3707672b59a527747",
         "is_dirty": true,
         "path": "/Users/brianvo/Documents/GitHub/Poker_RL_yikes/.git"
     },

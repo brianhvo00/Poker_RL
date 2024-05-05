@@ -39,7 +39,7 @@ def train(args):
     )
     # Initialize the agent and use random agents as opponents
     agents = [agent]
-    for _ in range(1, env.num_players):
+    for _ in range(1, 2):
         agents.append(RandomAgent(num_actions=env.num_actions))
     env.set_agents(agents)
 
